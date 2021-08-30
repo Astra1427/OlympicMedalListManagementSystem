@@ -79,7 +79,7 @@ namespace OlympicMedalListManagementSystem.Employee
             dgvAthletes.Columns.Clear();
             dgvAthletes.Columns.Clear();
 
-            var athletes = Uti.db.Athletes.ToList().Where(a => a.Name.ToLower().Contains(name) && countryID == 0 ? true : (a.CountryID == countryID)).ToList().Select(a => new {
+            var athletes = Uti.db.Athletes.ToList().Where(a => a.Name.ToLower().Contains(name) && (countryID == 0 ? true : (a.CountryID == countryID))).Select(a => new {
                 a.ID,
                 a.Name,
                 a.PortraitImg,

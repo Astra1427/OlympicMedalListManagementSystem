@@ -36,6 +36,7 @@ namespace OlympicMedalListManagementSystem.Employee
             this.txtContent = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,11 +102,22 @@ namespace OlympicMedalListManagementSystem.Employee
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(537, 81);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 50);
+            this.btnEdit.TabIndex = 5;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // NewsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 544);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtContent);
@@ -115,6 +127,7 @@ namespace OlympicMedalListManagementSystem.Employee
             this.Controls.Add(this.dgvDatas);
             this.Name = "NewsListForm";
             this.Text = "NewsListForm";
+            this.Load += new System.EventHandler(this.NewsListForm_Load);
             this.Controls.SetChildIndex(this.dgvDatas, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txtTitle, 0);
@@ -122,6 +135,7 @@ namespace OlympicMedalListManagementSystem.Employee
             this.Controls.SetChildIndex(this.txtContent, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnAdd, 0);
+            this.Controls.SetChildIndex(this.btnEdit, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -137,5 +151,6 @@ namespace OlympicMedalListManagementSystem.Employee
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

@@ -19,6 +19,7 @@ namespace OlympicMedalListManagementSystem.Common
         public string NewsContent { get; set; }
         public System.DateTime PublishTime { get; set; }
         public int AuthorID { get; set; }
+        public string NewsContentPreview { get; set; }
     
         public virtual Account Account { get; set; }
     }

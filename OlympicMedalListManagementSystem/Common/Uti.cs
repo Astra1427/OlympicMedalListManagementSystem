@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 
 namespace OlympicMedalListManagementSystem.Common
 {
@@ -32,5 +35,22 @@ namespace OlympicMedalListManagementSystem.Common
 
         public static DBEntities db = new DBEntities();
 
+
+        public static string RtfToPlainText(string rtf)
+        {
+            FlowDocument flowDocument = new FlowDocument();
+            TextRange textRange = new TextRange(flowDocument.ContentStart,flowDocument.ContentEnd);
+
+            
+            using (MemoryStream ms =new MemoryStream(Encoding.UTF8.GetBytes(rtf ?? string.Empty)))
+            {
+                textRange.Load(ms,dataFormat:DataFormats.Rtf);
+            }
+            return textRange.Text;
+        }
+
     }
+
+
+
 }

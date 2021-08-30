@@ -39,9 +39,18 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.4.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.4.2\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -139,6 +148,7 @@
     <Compile Include="Common\News.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\SignalRHelper.cs" />
     <Compile Include="Common\Sport.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -148,6 +158,12 @@
     </Compile>
     <Compile Include="Employee\AddMedalForm.Designer.cs">
       <DependentUpon>AddMedalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\EditNewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\EditNewsForm.Designer.cs">
+      <DependentUpon>EditNewsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Employee\MainForm.cs">
       <SubType>Form</SubType>
@@ -221,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employee\AddMedalForm.resx">
       <DependentUpon>AddMedalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\EditNewsForm.resx">
+      <DependentUpon>EditNewsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Employee\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

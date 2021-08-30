@@ -1,4 +1,5 @@
-﻿using OlympicMedalListManagementSystem.Common;
+﻿using Microsoft.AspNet.SignalR.Client;
+using OlympicMedalListManagementSystem.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,10 +38,22 @@ namespace OlympicMedalListManagementSystem.Employee
                 {
                     Title = txtTitle.Text,
                     NewsContent = txtContent.Rtf,
+                    NewsContentPreview = (txtContent.Text.Length > 30 ? txtContent.Text.Substring(0, 30) : txtContent.Text) + "...",
                     PublishTime = DateTime.Now,
                     AuthorID = Uti.LoggedAccount.ID
                 });
                 Uti.db.SaveChanges();
+
+                var hubConnection = new HubConnection("http://localhost:56443/");
+                var chat = hubConnection.CreateHubProxy("notificationHub");
+                chat.On<string, string>("addNewMessageToPage",(name,message)=> {
+                    MessageBox.Show(message,name);
+                });
+
+                hubConnection.Start().Wait();
+                chat.Invoke("notificationMessage","New ID",Uti.db.News.ToList().LastOrDefault().ID.ToString());
+
+
                 MessageBox.Show("Success!");
             }
             catch (Exception ex)
