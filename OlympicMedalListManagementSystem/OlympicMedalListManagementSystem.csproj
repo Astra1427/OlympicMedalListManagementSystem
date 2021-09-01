@@ -159,6 +159,12 @@
     <Compile Include="Employee\AddMedalForm.Designer.cs">
       <DependentUpon>AddMedalForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Employee\ChooseSportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\ChooseSportForm.Designer.cs">
+      <DependentUpon>ChooseSportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Employee\EditNewsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +244,9 @@
     <EmbeddedResource Include="Employee\AddMedalForm.resx">
       <DependentUpon>AddMedalForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Employee\ChooseSportForm.resx">
+      <DependentUpon>ChooseSportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Employee\EditNewsForm.resx">
       <DependentUpon>EditNewsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -314,6 +323,7 @@
       <DependentUpon>DB.edmx</DependentUpon>
       <LastGenOutput>DB.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\乒乓球.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

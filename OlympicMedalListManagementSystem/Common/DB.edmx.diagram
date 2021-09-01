@@ -15,6 +15,7 @@
         <AssociationConnector Association="OlympicMedalListModel.FK_Athletes_Countries" ManuallyRouted="false" />
         <AssociationConnector Association="OlympicMedalListModel.FK_MedalList_Athletes" ManuallyRouted="false" />
         <AssociationConnector Association="OlympicMedalListModel.FK_MedalList_Sports" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympicMedalListModel.FK_News_Sports" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

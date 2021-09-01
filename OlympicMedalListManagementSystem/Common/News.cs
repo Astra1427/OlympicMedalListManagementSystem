@@ -20,7 +20,10 @@ namespace OlympicMedalListManagementSystem.Common
         public System.DateTime PublishTime { get; set; }
         public int AuthorID { get; set; }
         public string NewsContentPreview { get; set; }
+        public bool GoldNews { get; set; }
+        public Nullable<int> SportID { get; set; }
     
         public virtual Account Account { get; set; }
+        public virtual Sport Sport { get; set; }
     }
 }

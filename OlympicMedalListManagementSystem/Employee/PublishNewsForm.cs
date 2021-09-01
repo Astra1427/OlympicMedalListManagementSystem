@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,11 @@ namespace OlympicMedalListManagementSystem.Employee
                 MessageBox.Show("Please input the content!");
                 return;
             }
+            if (ChosenSport == null)
+            {
+                MessageBox.Show("Please Choose Sport!");
+                return;
+            }
 
             try
             {
@@ -40,18 +46,21 @@ namespace OlympicMedalListManagementSystem.Employee
                     NewsContent = txtContent.Rtf,
                     NewsContentPreview = (txtContent.Text.Length > 30 ? txtContent.Text.Substring(0, 30) : txtContent.Text) + "...",
                     PublishTime = DateTime.Now,
-                    AuthorID = Uti.LoggedAccount.ID
+                    AuthorID = Uti.LoggedAccount.ID,
+                    SportID = ChosenSport.ID,
+                    GoldNews = cbGoldNews.Checked
+                    
                 });
                 Uti.db.SaveChanges();
 
-                var hubConnection = new HubConnection("http://localhost:56443/");
-                var chat = hubConnection.CreateHubProxy("notificationHub");
-                chat.On<string, string>("addNewMessageToPage",(name,message)=> {
-                    MessageBox.Show(message,name);
-                });
+                //var hubConnection = new HubConnection("http://localhost:56443/");
+                //var chat = hubConnection.CreateHubProxy("notificationHub");
+                //chat.On<string, string>("addNewMessageToPage",(name,message)=> {
+                //    MessageBox.Show(message,name);
+                //});
 
-                hubConnection.Start().Wait();
-                chat.Invoke("notificationMessage","New ID",Uti.db.News.ToList().LastOrDefault().ID.ToString());
+                //hubConnection.Start().Wait();
+                //chat.Invoke("notificationMessage","New ID",Uti.db.News.ToList().LastOrDefault().ID.ToString());
 
 
                 MessageBox.Show("Success!");
@@ -65,6 +74,33 @@ namespace OlympicMedalListManagementSystem.Employee
             {
                 nlf.Search("","");
                 nlf.LocationLastRow();
+            }
+        }
+
+
+        public Sport ChosenSport { get; set; }
+        private void btnChoose_Click(object sender, EventArgs e)
+        {
+            var chooseSportForm = new ChooseSportForm() { Owner = this };
+            if (chooseSportForm.ShowDialog() == DialogResult.OK)
+            {
+                ChosenSport = Uti.db.Sports.Find(chooseSportForm.ReturnID);
+                if (ChosenSport == null)
+                {
+                    MessageBox.Show("The Sport is Undefind!\nPlease rechoose!");
+                    return;
+                }
+                if (!lSportName.Visible)
+                {
+                    lSportName.Visible = true;
+                    pbSportIcon.Visible = true;
+                }
+
+                lSportName.Text = ChosenSport.Name;
+                using (MemoryStream ms = new MemoryStream(ChosenSport.SportIcon))
+                {
+                    pbSportIcon.Image = Image.FromStream(ms);
+                }
             }
         }
     }

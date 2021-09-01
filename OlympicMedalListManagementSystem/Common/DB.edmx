@@ -54,6 +54,8 @@
           <Property Name="NewsContent" Type="varchar(max)" Nullable="false" />
           <Property Name="NewsContentPreview" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="PublishTime" Type="datetime" Nullable="false" />
+          <Property Name="GoldNews" Type="bit" Nullable="false" />
+          <Property Name="SportID" Type="int" />
           <Property Name="AuthorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sports">
@@ -112,6 +114,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_Sports">
+          <End Role="Sports" Type="Self.Sports" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sports">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OlympicMedalListModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Athletes" EntityType="Self.Athletes" Schema="dbo" store:Type="Tables" />
@@ -133,6 +147,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_News_Account" Association="Self.FK_News_Account">
             <End Role="Account" EntitySet="Account" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Sports" Association="Self.FK_News_Sports">
+            <End Role="Sports" EntitySet="Sports" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
         </EntityContainer>
@@ -197,6 +215,9 @@
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Self.FK_News_Account" FromRole="News" ToRole="Account" />
           <Property Name="NewsContentPreview" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GoldNews" Type="Boolean" Nullable="false" />
+          <Property Name="SportID" Type="Int32" />
+          <NavigationProperty Name="Sport" Relationship="OlympicMedalListModel.FK_News_Sports" FromRole="News" ToRole="Sport" />
         </EntityType>
         <EntityType Name="Sport">
           <Key>
@@ -206,6 +227,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SportIcon" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="MedalLists" Relationship="Self.FK_MedalList_Sports" FromRole="Sports" ToRole="MedalList" />
+          <NavigationProperty Name="News" Relationship="OlympicMedalListModel.FK_News_Sports" FromRole="Sport" ToRole="News" />
         </EntityType>
         <Association Name="FK_News_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -278,7 +300,23 @@
             <End Role="Sports" EntitySet="Sports" />
             <End Role="MedalList" EntitySet="MedalLists" />
           </AssociationSet>
+          <AssociationSet Name="FK_News_Sports" Association="OlympicMedalListModel.FK_News_Sports">
+            <End Role="Sport" EntitySet="Sports" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_News_Sports">
+          <End Type="OlympicMedalListModel.Sport" Role="Sport" Multiplicity="0..1" />
+          <End Type="OlympicMedalListModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -332,6 +370,8 @@
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="OlympicMedalListModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="GoldNews" ColumnName="GoldNews" />
                 <ScalarProperty Name="NewsContentPreview" ColumnName="NewsContentPreview" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

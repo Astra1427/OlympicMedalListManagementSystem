@@ -18,6 +18,7 @@ namespace OlympicMedalListManagementSystem.Common
         public Sport()
         {
             this.MedalLists = new HashSet<MedalList>();
+            this.News = new HashSet<News>();
         }
     
         public int ID { get; set; }
@@ -26,5 +27,7 @@ namespace OlympicMedalListManagementSystem.Common
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedalList> MedalLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
     }
 }
