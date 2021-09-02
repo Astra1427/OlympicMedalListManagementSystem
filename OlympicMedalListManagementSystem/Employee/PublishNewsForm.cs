@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
+using Newtonsoft.Json;
 using OlympicMedalListManagementSystem.Common;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace OlympicMedalListManagementSystem.Employee
                 });
                 Uti.db.SaveChanges();
 
-                //var hubConnection = new HubConnection("http://localhost:56443/");
+                //var hubConnection = new HubConnection("http://localhost:57601/");
                 //var chat = hubConnection.CreateHubProxy("notificationHub");
                 //chat.On<string, string>("addNewMessageToPage",(name,message)=> {
                 //    MessageBox.Show(message,name);
@@ -62,6 +63,17 @@ namespace OlympicMedalListManagementSystem.Employee
                 //hubConnection.Start().Wait();
                 //chat.Invoke("notificationMessage","New ID",Uti.db.News.ToList().LastOrDefault().ID.ToString());
 
+                try
+                {
+                    //Notification all client
+                    SignalRHelper signal = new SignalRHelper();
+                    string json  = JsonConvert.SerializeObject(Uti.db.News.ToList().LastOrDefault());
+                    signal.SendMessage(cbGoldNews.Checked ? 1 : 0, json);
+                }
+                catch (Exception ex)
+                {
+
+                }
 
                 MessageBox.Show("Success!");
             }
@@ -69,6 +81,7 @@ namespace OlympicMedalListManagementSystem.Employee
             {
                 MessageBox.Show("Publish Failed!");
             }
+
 
             if (this.Owner is NewsListForm nlf)
             {

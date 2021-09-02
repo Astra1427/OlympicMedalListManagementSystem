@@ -16,14 +16,20 @@ namespace OlympicMedalListManagementSystem.Common
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public string NewsContent { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public System.DateTime PublishTime { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public int AuthorID { get; set; }
         public string NewsContentPreview { get; set; }
         public bool GoldNews { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public Nullable<int> SportID { get; set; }
     
+        [Newtonsoft.Json.JsonIgnore]
         public virtual Account Account { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public virtual Sport Sport { get; set; }
     }
 }
