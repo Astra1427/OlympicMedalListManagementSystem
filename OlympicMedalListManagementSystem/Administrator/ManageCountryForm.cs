@@ -61,7 +61,7 @@ namespace OlympicMedalListManagementSystem.Administrator
             {
                 btnMangeAthlete.Visible = true;
 
-                btnMangeAthlete.Text = $"Add athletes for {dgvDatas.SelectedRows[0].Cells[1].Value}";
+                btnMangeAthlete.Text = $"Add athletes for {dgvDatas.SelectedRows[0].Cells[2].Value}";
 
             }
 
