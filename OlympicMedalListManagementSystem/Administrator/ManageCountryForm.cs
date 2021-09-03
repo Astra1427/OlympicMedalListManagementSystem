@@ -60,9 +60,7 @@ namespace OlympicMedalListManagementSystem.Administrator
             if (dgvDatas.SelectedRows.Count != 0)
             {
                 btnMangeAthlete.Visible = true;
-
                 btnMangeAthlete.Text = $"Add athletes for {dgvDatas.SelectedRows[0].Cells[2].Value}";
-
             }
 
         }
